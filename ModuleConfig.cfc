@@ -13,20 +13,26 @@ component {
 
 
 		interceptors = [
+			// This interceptor will look for missing pages and see if they're legacy URLs.
 			{class="#moduleMapping#.interceptors.BlogCFCCompat"}
 		];
 
 	}
 
 	function onLoad(){
+		// When the module loads, add its routes to the SES interceptor
 		var interceptorService = wirebox.getInstance(dsl="coldbox:interceptorService");
 		var SES = interceptorService.getInterceptor("SES");
 		
-		// Order is important
-		SES.addRoute(pattern=":year-numeric{4}",										handler="contentbox-ui:blog", action="archives", append=false);
-		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}",					handler="contentbox-ui:blog", action="archives", append=false);
-		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}/:day-numeric{1,2}",	handler="contentbox-ui:blog", action="archives", append=false);
+		// Order is important!!
 		
+		// http://www.example.com/2013
+		SES.addRoute(pattern=":year-numeric{4}",										handler="contentbox-ui:blog", action="archives", append=false);
+		//http://www.example.com/2013/7
+		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}",					handler="contentbox-ui:blog", action="archives", append=false);
+		// http://www.example.com/2013/7/4
+		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}/:day-numeric{1,2}",	handler="contentbox-ui:blog", action="archives", append=false);
+		// http://www.example.com/2013/7/4/why-i-love-independance-day
 		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}/:day-numeric{1,2}/:entrySlug", handler="contentbox-ui:blog", action="entry", append=false);
 	}
 
