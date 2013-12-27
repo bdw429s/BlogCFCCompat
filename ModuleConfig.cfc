@@ -26,13 +26,13 @@ component {
 		
 		// Order is important!!
 		
-		// http://www.example.com/2013
+		// http://www.example.com/index.cfm/2013
 		SES.addRoute(pattern=":year-numeric{4}",										handler="contentbox-ui:blog", action="archives", append=false);
-		//http://www.example.com/2013/7
+		//http://www.example.com/index.cfm/2013/7
 		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}",					handler="contentbox-ui:blog", action="archives", append=false);
-		// http://www.example.com/2013/7/4
+		// http://www.example.com/index.cfm/2013/7/4
 		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}/:day-numeric{1,2}",	handler="contentbox-ui:blog", action="archives", append=false);
-		// http://www.example.com/2013/7/4/why-i-love-independance-day
+		// http://www.example.com/index.cfm/2013/7/4/why-i-love-independance-day
 		SES.addRoute(pattern=":year-numeric{4}/:month-numeric{1,2}/:day-numeric{1,2}/:entrySlug", handler="contentbox-ui:blog", action="entry", append=false);
 	}
 
