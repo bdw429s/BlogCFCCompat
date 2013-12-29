@@ -6,6 +6,15 @@ component {
 		// This is the slug that wasn't found.  Let's check and see if it's a BlogCFC page or category.
 		var slug = arguments.interceptData.missingPage;
 				
+		// It's the RSS feed
+		// http://www.example.com/rss.cfm?mode=full
+		if( slug == 'rss') {
+			// 404 already set prior to interception announcement
+			event.setHTTPHeader("200","OK");
+			runEvent('contentbox-ui:blog.rss');
+			
+		}
+						
 		// It's a page
 		// http://www.example.com/page.cfm/pageSlug
 		if( left(slug,9) == 'page.cfm/' && len(slug) > 9) {
@@ -26,7 +35,7 @@ component {
 			event.setHTTPHeader("200","OK");
 			setNextEvent( URL=CBHelper.linkCategory( category ), statusCode="301" );
 		}
-		
+				
 		// If we make it here, it isn't a page or a category-- just let the page not 
 		// found bubble up and take over.  You gave it your best shot, chap.
 	} 

@@ -13,4 +13,6 @@ Adds routes for the following URL patterns.
 * http://www.example.com/index.cfm/2013/7/4/why-i-love-independance-day
 * http://www.example.com/index.cfm/categoryslug
 * http://www.example.com/page.cfm/pageSlug
+* http://www.example.com/rss.cfm?mode=full
+
 
